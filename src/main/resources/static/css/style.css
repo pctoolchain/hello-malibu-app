@@ -1,0 +1,28 @@
+body {
+    font-family: "Shadows Into Light";
+    font-size: 50px;
+    color: white;
+    letter-spacing: 3px;
+}
+
+.blue {
+  background: url(/img/blue.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.orange {
+  background: url(/img/orange.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.center {
+    position: absolute;
+    top: 25%;
+    left: 30%;
+}​
