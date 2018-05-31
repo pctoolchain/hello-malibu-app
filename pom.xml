@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>test.package</groupId>
-	<artifactId>spinnaker-demo</artifactId>
-	<version>1.0</version>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>test.package</groupId>
+    <artifactId>spinnaker-demo</artifactId>
+    <version>1.0</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -30,7 +30,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-		<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <scope>2.0.1.RELEASE</scope>
@@ -40,6 +40,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <docker.image.prefix>springio</docker.image.prefix>
     </properties>
 
     <build>
@@ -59,57 +60,70 @@
                     </execution>
                 </executions>
             </plugin>
-			<plugin>
-			<!--<groupId>com.aerse.maven</groupId>-->
-			<groupId>org.vafer</groupId>
-			<!--<artifactId>deb-maven-plugin</artifactId>-->
-			<artifactId>jdeb</artifactId>
-			<version>1.6</version>
-			<!--<configuration>
-			  <description>A test project</description>
-				  <maintainer>Tim OBrien &lt;tobrien@discursive.com&gt;</maintainer>
-				  <section>libs</section>
-				  <priority>optional</priority>     
-				  <architecture>all</architecture>
-				  <fileSets>
-					<fileSet>
-						<source>target/spinnaker-demo-1.0.jar</source>
-						<target>/</target>
-					</fileSet>
-				  </fileSets>
-			</configuration>-->
-			<executions>
-				<execution>
-					<phase>package</phase>
-					<goals>
-						<goal>jdeb</goal>
-					</goals>
-				<configuration>
-					<dataSet>
-						<data>
-							<src>${project.build.directory}/${project.build.finalName}.jar</src>
-							<type>file</type>
-							<mapper>
-								<type>perm</type>
-								<prefix>/usr/share/jdeb/lib</prefix>
-							</mapper>
-						</data>
-						<data>
-							<src>src/deb/upstart/${project.artifactId}.conf</src>
-							<type>file</type>
-							<mapper>
-								<type>perm</type>
-								<prefix>/etc/init</prefix>
-								<filemode>644</filemode>
-								<user>root</user>
-								<group>root</group>
-							</mapper>
-						</data>
-					</dataSet>
-				</configuration>
-				</execution>
-			</executions>
-		  </plugin>
+            <plugin>
+                <!--<groupId>com.aerse.maven</groupId>-->
+                <groupId>org.vafer</groupId>
+                <!--<artifactId>deb-maven-plugin</artifactId>-->
+                <artifactId>jdeb</artifactId>
+                <version>1.6</version>
+                <!--<configuration>
+                  <description>A test project</description>
+                      <maintainer>Tim OBrien &lt;tobrien@discursive.com&gt;</maintainer>
+                      <section>libs</section>
+                      <priority>optional</priority>
+                      <architecture>all</architecture>
+                      <fileSets>
+                        <fileSet>
+                            <source>target/spinnaker-demo-1.0.jar</source>
+                            <target>/</target>
+                        </fileSet>
+                      </fileSets>
+                </configuration>-->
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jdeb</goal>
+                        </goals>
+                        <configuration>
+                            <dataSet>
+                                <data>
+                                    <src>${project.build.directory}/${project.build.finalName}.jar</src>
+                                    <type>file</type>
+                                    <mapper>
+                                        <type>perm</type>
+                                        <prefix>/usr/share/jdeb/lib</prefix>
+                                    </mapper>
+                                </data>
+                                <data>
+                                    <src>src/deb/upstart/${project.artifactId}.conf</src>
+                                    <type>file</type>
+                                    <mapper>
+                                        <type>perm</type>
+                                        <prefix>/etc/init</prefix>
+                                        <filemode>644</filemode>
+                                        <user>root</user>
+                                        <group>root</group>
+                                    </mapper>
+                                </data>
+                            </dataSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.3.6</version>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
