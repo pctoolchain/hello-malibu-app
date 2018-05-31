@@ -11,7 +11,7 @@ pipeline {
 				sh "mvn clean package"
 				echo "Deb package built from BB sources"
 				echo "test bb -> spinnaker -> Jenkins -> AWS"
-				//trigger changes again
+				//trigger change again
 				//s3Upload consoleLogLevel: 'INFO', dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'demo-repo-spinnaker', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: true, noUploadOnFailure: false, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: '*.java', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'artifactpublisher', userMetadata: []
 			}
         } 
