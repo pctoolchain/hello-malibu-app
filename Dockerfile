@@ -4,4 +4,4 @@ ADD ./src /src
 ADD ./pom.xml /pom.xml
 RUN mvn package
 RUN cd target/
-CMD["java", "-jar", "spinnaker-demo-1.0.jar"]
+CMD ["java", "-jar", "spinnaker-demo-1.0.jar"]
