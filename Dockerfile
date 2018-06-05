@@ -3,5 +3,6 @@ VOLUME /tmp
 ADD ./src /src
 ADD ./pom.xml /pom.xml
 RUN mvn package
-RUN cd target/
+WORKDIR /usr/share/jdeb/lib/
+RUN ls -l
 CMD ["java", "-jar", "spinnaker-demo-1.0.jar"]
