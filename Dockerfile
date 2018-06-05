@@ -5,4 +5,5 @@ ADD ./pom.xml /pom.xml
 RUN mvn package
 WORKDIR ./target
 RUN ls -l
+RUN chmod a+x spinnaker-demo-1.0.jar
 CMD ["java", "-jar", "/src/target/spinnaker-demo-1.0.jar"]
