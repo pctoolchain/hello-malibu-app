@@ -3,4 +3,4 @@ VOLUME /tmp
 ADD ./src /src
 ADD ./pom.xml /pom.xml
 RUN ls -l /src
-RUN mvn build
+RUN mvn package
