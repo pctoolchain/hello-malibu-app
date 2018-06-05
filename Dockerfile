@@ -5,4 +5,4 @@ ADD ./pom.xml /pom.xml
 RUN mvn package
 WORKDIR ./target
 RUN ls -l
-CMD ["java", "-jar", "spinnaker-demo-1.0.jar"]
+CMD ["java", "-jar", "/src/target/spinnaker-demo-1.0.jar"]
