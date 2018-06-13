@@ -9,5 +9,6 @@ RUN tar xvfz node_exporter-0.16.0.linux-amd64.tar.gz
 RUN ls -l
 EXPOSE 9100
 EXPOSE 8080
-RUN ls -l
-CMD ["bash", "-c", "wrapper_script.sh"]
+RUN chmod a+x wrapper_script.sh
+RUN ls -lrt
+CMD ./wrapper_script.sh
