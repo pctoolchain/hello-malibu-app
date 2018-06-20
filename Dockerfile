@@ -1,5 +1,4 @@
 FROM maven:3.5.3-jdk-8-alpine
-FROM frolvlad/alpine-python2:latest
 VOLUME /tmp
 ADD ./src /src
 ADD ./pom.xml /pom.xml
@@ -12,4 +11,9 @@ EXPOSE 9100
 EXPOSE 8080
 RUN chmod a+x wrapper_script.sh
 RUN ls -lrt
+RUN apk add --no-cache python && \
+    python -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip install --upgrade pip setuptools && \
+    rm -r /root/.cache
 CMD ./wrapper_script.sh
