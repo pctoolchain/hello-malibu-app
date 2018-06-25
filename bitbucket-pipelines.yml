@@ -2,4 +2,4 @@ pipelines:
   default:
     - step:
         script:
-          - mvn sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=pctoolchain-bitbucket -Dsonar.login=$SONAR_TOKEN
+          - mvn clean package sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=pctoolchain-bitbucket -Dsonar.login=$SONAR_TOKEN
