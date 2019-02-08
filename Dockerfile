@@ -9,7 +9,7 @@ RUN mvn package
 #RUN wget https://github.com/prometheus/alertmanager/releases/download/v0.15.0-rc.3/alertmanager-0.15.0-rc.3.linux-amd64.tar.gz
 #RUN tar xvfz alertmanager-0.15.0-rc.3.linux-amd64.tar.gz 
 RUN ls -l
-EXPOSE 9100
+#EXPOSE 9100
 EXPOSE 8080
 #RUN chmod a+x wrapper_script.sh
 #RUN ls -lrt
