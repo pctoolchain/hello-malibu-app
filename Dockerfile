@@ -10,7 +10,7 @@ RUN mvn package
 #RUN tar xvfz alertmanager-0.15.0-rc.3.linux-amd64.tar.gz 
 RUN ls -l
 #EXPOSE 9100
-EXPOSE 8080
+#EXPOSE 8080
 #RUN chmod a+x wrapper_script.sh
 #RUN ls -lrt
 #CMD ./wrapper_script.sh
