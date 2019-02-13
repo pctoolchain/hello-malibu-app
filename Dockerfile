@@ -12,5 +12,5 @@ RUN mvn package
 #EXPOSE 9100
 EXPOSE 8080
 #RUN chmod a+x wrapper_script.sh
-RUN ls -lrt
+#RUN ls -lrt
 #CMD ./wrapper_script.sh
