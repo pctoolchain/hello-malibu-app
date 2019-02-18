@@ -23,9 +23,5 @@ podTemplate(label: 'docker',
             sh "docker push malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
         }
     }
-    stage('AWS Test') {
-      sh 'curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws'
-      sh 'aws s3 ls'
-    }
   }
 }
