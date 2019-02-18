@@ -27,7 +27,7 @@ podTemplate(label: 'docker',
     stage('Trigger Spinnaker') {
       container('docker') {
         withCredentials([string(credentialsId: 'spin-pipeline', variable: 'secretUrl')]) {
-          curl -X POST ${secretUrl}
+          sh "curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{}' '${secretUrl}'"
         }
       }
     }
