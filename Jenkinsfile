@@ -5,8 +5,8 @@ podTemplate(label: 'docker',
   ) {
 
   def image = "pctn/hello-malibu"
-/*
   node('docker') {
+/*
     stage('Checkout GitHub') {
       git 'https://github.com/pctoolchain/hello-malibu-app.git'
     }
