@@ -11,8 +11,7 @@ podTemplate(label: 'docker',
     }
     stage('Docker Build') {
       container('docker') {
-        sh "docker build -t ${image} ."
-        sh "curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws"
+//        sh "docker build -t ${image} ."
       }
     }
     stage('Docker Push') {
@@ -29,9 +28,12 @@ podTemplate(label: 'docker',
       container('docker') {
         sh "curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws"
         sh "apk update && apk add bash"
-        withAWS(profile:'default') {
-            sh 'aws s3 ls'
-        }
+            withCredentials([[
+                $class: 'AmazonWebServicesCredentialsBinding',
+                credentialsId: 'aws-role',
+                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+            ]]) { sh 'aws s3 ls' }
       }
     }    
   }
