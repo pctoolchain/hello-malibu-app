@@ -28,6 +28,7 @@ podTemplate(label: 'docker',
     stage('AWS Test') {
       container('docker') {
         sh "curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws"
+        sh "apk update && apk add bash"
         sh "aws s3 ls"
       }
     }    
