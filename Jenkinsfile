@@ -30,6 +30,5 @@ podTemplate(label: 'docker',
         sh "aws s3 ls"
       }
     }
-
   }
 }
