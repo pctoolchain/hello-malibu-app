@@ -7,7 +7,7 @@ podTemplate(label: 'docker',
   
   node('docker') {
     stage('Checkout GitHub') {
-      git 'https://github.com/malibupctn/hello-malibu-app.git'
+      git 'https://github.com/pctoolchain/hello-malibu-app.git'
     }
     stage('Docker Build') {
       container('docker') {
