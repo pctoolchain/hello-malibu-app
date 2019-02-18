@@ -20,8 +20,8 @@ podTemplate(label: 'docker',
             usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                 sh "docker login -u ${USERNAME} -p ${PASSWORD} https://malibu-repo-local.devrepo.malibu-pctn.com"
             }
-            sh "docker tag pctn/hello-malibu:latest malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
-            sh "docker push malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
+//            sh "docker tag pctn/hello-malibu:latest malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
+//            sh "docker push malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
         }
     }
   }
