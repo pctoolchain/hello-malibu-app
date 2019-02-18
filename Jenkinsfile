@@ -5,7 +5,7 @@ podTemplate(label: 'docker',
   ) {
 
   def image = "pctn/hello-malibu"
-  
+/*
   node('docker') {
     stage('Checkout GitHub') {
       git 'https://github.com/pctoolchain/hello-malibu-app.git'
@@ -24,7 +24,7 @@ podTemplate(label: 'docker',
             sh "docker tag pctn/hello-malibu:latest malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
             sh "docker push malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
         }
-    }
+    } */
     stage('AWS Test') {
       container('aws') {
         sh "aws s3 ls"
