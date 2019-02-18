@@ -11,25 +11,23 @@ podTemplate(label: 'docker',
     }
     stage('Docker Build') {
       container('docker') {
-//        sh "docker build -t ${image} ."
+        sh "docker build -t ${image} ."
       }
     }
     stage('Docker Push') {
-        container('docker') {
-            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory',
-            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                sh "docker login -u ${USERNAME} -p ${PASSWORD} https://malibu-repo-local.devrepo.malibu-pctn.com"
-            }
-//            sh "docker tag pctn/hello-malibu:latest malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
-//            sh "docker push malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
-        }
+      container('docker') {
+          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory',
+          usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+              sh "docker login -u ${USERNAME} -p ${PASSWORD} https://malibu-repo-local.devrepo.malibu-pctn.com"
+          }
+          sh "docker tag pctn/hello-malibu:latest malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
+          sh "docker push malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
+      }
     }
-    stage('AWS Test') {
-      //sh "curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws"
-      //sh "apk update && apk add bash"
-      //withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-role']]) {
-      sh 'aws lambda invoke --invocation-type RequestResponse --function-name UpdateSecurityGroupWithHomeIP --region eu-west-1 --log-type Tail --payload "{\"ip\":\"1.2.3.4/32\"}"'
-      //}
-    }    
+    stage('Trigger Spinnaker') {
+      withCredentials(credentialsId: 'spin-pipeline', variable: 'secretUrl') {
+        sh "curl -X POST ${secretUrl}"
+      }
+    }
   }
 }
