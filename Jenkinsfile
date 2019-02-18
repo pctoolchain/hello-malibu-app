@@ -29,7 +29,8 @@ podTemplate(label: 'docker',
         sh "curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws"
         sh "apk update && apk add bash"
         withAWS(region:'eu-west-1') {
-            sh 'aws s3 ls'
+          sh "aws s3 ls"
+          sh "echo DONE"
         }
       }
     }    
