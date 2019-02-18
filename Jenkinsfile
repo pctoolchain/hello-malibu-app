@@ -1,12 +1,10 @@
 podTemplate(label: 'docker',
-  containers: [containerTemplate(name: 'docker', image: 'docker:1.11', ttyEnabled: true, command: 'cat'),
-              containerTemplate(name: 'aws', image: 'mesosphere/aws-cli', ttyEnabled: true, command: 'cat')],
+  containers: [containerTemplate(name: 'docker', image: 'docker:1.11', ttyEnabled: true, command: 'cat')],
   volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
   ) {
 
   def image = "pctn/hello-malibu"
   node('docker') {
-/*
     stage('Checkout GitHub') {
       git 'https://github.com/pctoolchain/hello-malibu-app.git'
     }
@@ -24,11 +22,10 @@ podTemplate(label: 'docker',
             sh "docker tag pctn/hello-malibu:latest malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
             sh "docker push malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
         }
-    } */
+    }
     stage('AWS Test') {
-      container('aws') {
-        sh "aws s3 ls"
-      }
+      sh 'curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws'
+      sh 'aws s3 ls'
     }
   }
 }
