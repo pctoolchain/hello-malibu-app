@@ -12,6 +12,7 @@ podTemplate(label: 'docker',
     stage('Docker Build') {
       container('docker') {
         sh "docker build -t ${image} ."
+        sh "curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws"
       }
     }
     stage('Docker Push') {
@@ -24,5 +25,11 @@ podTemplate(label: 'docker',
 //            sh "docker push malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
         }
     }
+    stage('AWS Test') {
+      container('docker') {
+        sh "curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws"
+        sh "aws s3 ls"
+      }
+    }    
   }
 }
