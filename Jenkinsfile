@@ -30,9 +30,7 @@ podTemplate(label: 'docker',
         sh "apk update && apk add bash"
             withCredentials([[
                 $class: 'AmazonWebServicesCredentialsBinding',
-                credentialsId: 'aws-role',
-                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                credentialsId: 'aws-role'
             ]]) { sh 'aws s3 ls' }
       }
     }    
