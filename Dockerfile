@@ -11,6 +11,7 @@ RUN mvn package
 RUN ls -l
 #EXPOSE 9100
 EXPOSE 8080
+CMD java -jar ./target/spinnaker-demo-1.0.jar
 #RUN chmod a+x wrapper_script.sh
 #RUN ls -lrt
 #CMD ./wrapper_script.sh
