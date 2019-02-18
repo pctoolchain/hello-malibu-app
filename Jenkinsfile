@@ -25,8 +25,8 @@ podTemplate(label: 'docker',
         }
     }
     stage('AWS Test') {
-      sh "curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws"
-      sh "apk update && apk add bash"
+      //sh "curl -o /usr/local/bin/aws https://raw.githubusercontent.com/mesosphere/aws-cli/master/aws.sh && chmod a+x /usr/local/bin/aws"
+      //sh "apk update && apk add bash"
       //withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-role']]) {
       sh 'aws lambda invoke --invocation-type RequestResponse --function-name UpdateSecurityGroupWithHomeIP --region eu-west-1 --log-type Tail --payload "{\"ip\":\"1.2.3.4/32\"}"'
       //}
