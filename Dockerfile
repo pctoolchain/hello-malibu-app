@@ -8,7 +8,7 @@ RUN mvn package
 #RUN tar xvfz node_exporter-0.16.0.linux-amd64.tar.gz
 #RUN wget https://github.com/prometheus/alertmanager/releases/download/v0.15.0-rc.3/alertmanager-0.15.0-rc.3.linux-amd64.tar.gz
 #RUN tar xvfz alertmanager-0.15.0-rc.3.linux-amd64.tar.gz 
-#RUN ls -l
+RUN ls -l
 #EXPOSE 9100
 EXPOSE 8080
 CMD java -jar ./target/spinnaker-demo-1.0.jar
