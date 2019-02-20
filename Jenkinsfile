@@ -11,7 +11,7 @@ podTemplate(label: 'docker',
     }
     stage('Docker Build') {
       container('docker') {
-        sh "docker build -t ${image} ."
+        sh "docker build --no-cache -t ${image} ."
       }
     }
     stage('Docker Push') {
