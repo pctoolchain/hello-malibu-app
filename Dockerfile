@@ -3,7 +3,7 @@ VOLUME /tmp
 ADD ./src /src
 ADD ./pom.xml /pom.xml
 #ADD ./wrapper_script.sh /wrapper_script.sh
-RUN mvn clean package
+RUN mvn package
 #RUN wget https://github.com/prometheus/node_exporter/releases/download/v0.16.0/node_exporter-0.16.0.linux-amd64.tar.gz
 #RUN tar xvfz node_exporter-0.16.0.linux-amd64.tar.gz
 #RUN wget https://github.com/prometheus/alertmanager/releases/download/v0.15.0-rc.3/alertmanager-0.15.0-rc.3.linux-amd64.tar.gz
