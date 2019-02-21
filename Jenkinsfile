@@ -21,7 +21,7 @@ podTemplate(label: 'docker',
               sh "docker login -u ${USERNAME} -p ${PASSWORD} https://malibu-repo-local.devrepo.malibu-pctn.com"
           }
           sh "docker tag pctn/hello-malibu:latest malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:${env.BUILD_NUMBER}"
-          sh "docker push malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:latest"
+          sh "docker push malibu-repo-local.devrepo.malibu-pctn.com/pctn/hello-malibu:${env.BUILD_NUMBER}"
       }
     }
     stage('Trigger Spinnaker') {
